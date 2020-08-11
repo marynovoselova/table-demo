@@ -1,0 +1,44 @@
+.createItem__address {
+    font-size: 120%;
+    font-weight: bold;
+    margin: 1% 0;
+}
+
+.createItem__header {
+    font-weight: bold;
+    margin-bottom: 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.createItem__label {
+    font-size: 140%;
+}
+
+.createItem__form {
+    background-color: rgb(201, 227, 255);
+    padding: 15px;
+    width: 50rem;
+}
+
+.btn__add {
+    background-color: white;
+    width: 100%;
+    padding: 1% 0;
+    margin-bottom: 1%;
+    font-weight: bold;
+}
+
+.createItem__description {
+    max-width: 100%;
+    padding: 0;
+    margin: 2% 0;
+}
+
+.error__message{
+    color: red;
+}
+
+.createItem__buttonClose {
+    font-size: 2rem;
+}

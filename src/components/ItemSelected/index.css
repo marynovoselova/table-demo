@@ -1,0 +1,35 @@
+label {
+    padding-left: 5px;
+}
+
+.label_bold {
+    font-weight: bold;
+}
+
+.itemSelected__form {
+    background-color: rgb(201, 227, 255);
+    padding: 15px;
+}
+
+.itemSelected__header {
+    font-weight: bold;
+    margin-bottom: 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.itemSelected__label {
+    font-size: 140%;
+}
+
+.itemSelected__address {
+    font-size: 120%;
+    font-weight: bold;
+    margin: 1% 0;
+}
+
+.itemSelected__description {
+    max-width: 100%;
+    padding: 0;
+    margin: 2% 0;
+}

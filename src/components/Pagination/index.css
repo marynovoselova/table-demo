@@ -1,0 +1,13 @@
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagination__button {
+    margin: 1% .2%;
+}
+
+.pagination__text {
+    text-align: start;
+    margin: 2% 1% 1% 1%;
+}
