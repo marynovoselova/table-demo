@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Table from "../Table";
-import TableService from "../../Services/TableService";
+import TableService from "../../services/TableService";
 import CreateItem from "../CreateItem";
 import SearchPanel from "../SearchPanel";
 import Spinner from "../Spinner";

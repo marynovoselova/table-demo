@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import TableService from "../../Services/TableService";
+import TableService from "../../services/TableService";
 import './index.css';
 import Input from "../Input";
 import TextArea from "../TextArea";
