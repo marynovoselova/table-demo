@@ -1,4 +1,4 @@
-import {DEFAULT_PAGE_SIZE} from "./conts";
+import {DEFAULT_PAGE_SIZE} from "./consts";
 import axios from 'axios';
 
 
@@ -41,7 +41,3 @@ export default class TableService {
         };
     }
 }
-
-
-
-
