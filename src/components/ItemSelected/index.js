@@ -10,7 +10,8 @@ export default class ItemSelected extends Component {
     tableService = new TableService();
 
     state = {
-        person: null
+        person: null,
+        edit: false
     }
 
     componentDidMount() {
@@ -43,6 +44,41 @@ export default class ItemSelected extends Component {
             });
     }
 
+
+    changeEdit = (value = false) => {
+        if (!this.state.edit) {
+            this.setState({
+                ...this.state,
+                edit: value
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                edit: false
+            });
+        }
+    };
+
+    renderButtonSave = () => {
+        if (this.state.edit) {
+            return (
+                <button
+                    className="btn btn-outline-success btn__save"
+                    onClick={() => this.changeEdit(false)}
+                >Save
+                </button>
+            )
+        }
+    }
+
+    transitionStylesForButton = () => {
+        if (!this.state.edit) {
+            return "btn btn-outline-warning btn__setting"
+        } else {
+            return "btn btn-outline-danger btn__cancel"
+        }
+    }
+
     render() {
 
         if (!this.state.person) {
@@ -50,21 +86,33 @@ export default class ItemSelected extends Component {
         }
 
         const {
-            firstName, lastName, phone, email, description,
-            address: {streetAddress, city, state, zip}
-        } = this.state.person;
+            person: {
+                firstName, lastName, phone, email, description,
+                address: {streetAddress, city, state, zip}
+            }, edit
+        } = this.state;
         const {onClose} = this.props;
+        const transitionDisabled = !edit ? "disabled" : "";
+        const transitionLabel = !edit ? "Edit" : "Cancel";
 
 
         return (
             <div className="rounded itemSelected__form">
                 <div className="itemSelected__header">
                     <div className="itemSelected__label">Selected person</div>
-                    <button
-                        className="close"
-                        onClick={onClose}
-                    >×
-                    </button>
+                    <div className="itemSelected__navigation">
+                        <button
+                            className={this.transitionStylesForButton()}
+                            onClick={() => this.changeEdit(true)}
+                        >{transitionLabel}
+                        </button>
+                        {this.renderButtonSave()}
+                        <button
+                            className="close"
+                            onClick={onClose}
+                        >×
+                        </button>
+                    </div>
                 </div>
                 <div className="needs-validation">
                     <div className="form-row">
@@ -72,12 +120,14 @@ export default class ItemSelected extends Component {
                             <Input
                                 value={firstName}
                                 label="First name"
+                                disabled={transitionDisabled}
                             />
                         </div>
                         <div className="col-md-6 mb-3">
                             <Input
                                 value={lastName}
                                 label="Last name"
+                                disabled={transitionDisabled}
                             />
                         </div>
                     </div>
@@ -86,12 +136,14 @@ export default class ItemSelected extends Component {
                             <Input
                                 value={phone}
                                 label="Phone"
+                                disabled={transitionDisabled}
                             />
                         </div>
                         <div className="col-md-6 mb-3">
                             <Input
                                 value={email}
                                 label="Email"
+                                disabled={transitionDisabled}
                             />
                         </div>
                     </div>
@@ -102,12 +154,14 @@ export default class ItemSelected extends Component {
                                 <Input
                                     value={streetAddress}
                                     label="Street address"
+                                    disabled={transitionDisabled}
                                 />
                             </div>
                             <div className="col-md-6 mb-3">
                                 <Input
                                     value={city}
                                     label="City"
+                                    disabled={transitionDisabled}
                                 />
                             </div>
                         </div>
@@ -116,12 +170,14 @@ export default class ItemSelected extends Component {
                                 <Input
                                     value={state}
                                     label="State"
+                                    disabled={transitionDisabled}
                                 />
                             </div>
                             <div className="col-md-6 mb-3">
                                 <Input
                                     value={zip}
                                     label="Zip"
+                                    disabled={transitionDisabled}
                                 />
                             </div>
                         </div>
@@ -130,6 +186,7 @@ export default class ItemSelected extends Component {
                         <TextArea
                             value={description}
                             label="Description"
+                            disabled={transitionDisabled}
                         />
                     </div>
                 </div>

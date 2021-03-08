@@ -1,0 +1,11 @@
+export const DEFAULT_PAGE_SIZE = 10;
+export const FIRST_NAME = 'firstName';
+export const LAST_NAME = 'lastName';
+export const EMAIL = 'email';
+export const PHONE = 'phone';
+export const HEADER_ACTIVE = 'header__column-active';
+export const ASCENDING = 'ascending';
+export const DESCENDING = 'descending';
+export const ONE = 1;
+export const MINUS_ONE = -1;
+export const PAGES_COUNT_TO_SHOW = 3;

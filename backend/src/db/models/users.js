@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
         zip: String
     },
     description: String
-}, { timestamps: true });
-
+}, {timestamps: true});
+UserSchema.index({'$**': 'text'});
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

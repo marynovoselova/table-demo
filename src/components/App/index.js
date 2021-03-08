@@ -9,6 +9,7 @@ import './index.css';
 import ButtonCreateItem from "../ButtonCreateItem";
 import ItemSelected from "../ItemSelected";
 import Pagination from "../Pagination";
+import { ASCENDING, DESCENDING, ONE, MINUS_ONE, DEFAULT_PAGE_SIZE } from "../../consts/index";
 
 export default class App extends Component {
 
@@ -20,8 +21,13 @@ export default class App extends Component {
         loading: true,
         renderCreateItem: false,
         isModalOpen: false,
-        currentPage: 0
-        // search: ''
+        currentPage: 0,
+        searchText: '',
+        pageCount: null,
+        sort: {
+            direction: null,
+            headerName: null
+        }
     };
 
     onPeopleLoaded = (people) => {
@@ -37,21 +43,37 @@ export default class App extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.currentPage !== prevState.currentPage) {
-            this.initPeople(this.state.currentPage);
+        if (this.state.currentPage !== prevState.currentPage || this.state.searchText !== prevState.searchText) {
+            this.initPeople(this.state.currentPage, this.state.searchText);
+            this.getTotalPeople();
+            console.log(`currentPage: ${this.state.currentPage}`);
         }
     }
 
-    initPeople = (currentPage = 0) => {
+    initPeople = (currentPage = 0, searchText) => {
         this.setState({
             ...this.state,
             currentPage,
+            searchText,
             loading: true,
         });
         this.tableService
-            .getListOfTableItems(currentPage)
+            .getData(currentPage, searchText)
             .then(this.onPeopleLoaded);
     };
+
+    getTotalPeople = () => {
+        this.tableService
+            .getTotalData()
+            .then((number) => {
+                const pageCount = Math.ceil(number/DEFAULT_PAGE_SIZE);
+                console.log(pageCount);
+                this.setState({
+                    ...this.state,
+                    pageCount
+                });
+            })
+    }
 
     renderLoading() {
         const {loading} = this.state;
@@ -92,41 +114,60 @@ export default class App extends Component {
         })
     }
 
-    // addData = ({newObj}) => {
-    //     this.setState(({ people }) => {
-    //         const newArr = [
-    //             ...people,
-    //             newObj
-    //         ];
-    //
-    //         return {
-    //             people: newArr
-    //         }
-    //     });
-    // };
+    onSearchPanel = ({target}) => {
+        this.setState({
+            searchText: target.value
+        })
+    };
 
+    sortPeople = (a, b, headerName, direction) => {
+        if (a[headerName] > b[headerName]) {
+            return direction === ASCENDING ? ONE : MINUS_ONE;
+        }
+        if (a[headerName] < b[headerName]) {
+            return direction === ASCENDING ? MINUS_ONE : ONE;
+        }
+        return 0;
+    };
 
-    // onSearchPanel = (e) => {
-    //     this.setState({
-    //         search: e.target.value
-    //     })
-    // };
+    onClickHeader = (headerName) => {
+        this.setState(({people}) => {
+            let direction;
+            if (this.state.sort.headerName === headerName) {
+                if (this.state.sort.direction) direction = this.getOppositeDirection(this.state.sort.direction);
+            } else {
+                direction = ASCENDING;
+            }
+            const arrSorted = people.sort((a, b) => this.sortPeople(a, b, headerName, direction));
+
+            return {
+                ...this.state,
+                people: arrSorted,
+                sort: {
+                    direction,
+                    headerName: headerName
+                }
+            };
+        });
+    };
+
+    getOppositeDirection(direction) {
+        if (direction === ASCENDING) return DESCENDING;
+        return ASCENDING;
+    }
 
 
     render() {
 
-        const {people, selectedPerson, isModalOpen, currentPage } = this.state;
+        const {people, selectedPerson, isModalOpen, currentPage, search, pageCount, sort: { direction, headerName }} = this.state;
 
         const content = (people.length > 1) ? <Table
             data={people}
             onPersonClicked={this.onPersonClicked}
-            // people={peopleAfterFilter}
+            onClickHeader={this.onClickHeader}
+            direction={direction}
+            headerName={headerName}
         /> : null;
-
-        // const peopleAfterFilter = people.filter((elem) => {
-        //     return elem.label.toUpperCase().includes(search.toUpperCase());
-        // });
-
 
         const modalWindow = isModalOpen ? this.renderModalWindow() : null;
 
@@ -139,12 +180,12 @@ export default class App extends Component {
                             onClick={() => this.onModalOpened(true)}
                         />
                     </div>
-                    <SearchPanel/>
-                    {/*<SearchPanel onSearchPanel={this.onSearchPanel} value={search} />*/}
+                    <SearchPanel onSearchPanel={this.onSearchPanel} value={search}/>
                     {content}
                     <Pagination
                         onCurrentPageClicked={this.initPeople}
                         currentPage={currentPage}
+                        pageCount={pageCount}
                     />
                     {modalWindow}
                     <ItemSelected

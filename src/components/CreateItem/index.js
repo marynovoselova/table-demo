@@ -140,15 +140,6 @@ export default class CreateItem extends Component {
         return isError ? "disabled" : "";
     };
 
-    // onError = (value) => {
-    //     if (value === "") {
-    //         return (
-    //             <div className="error__message">Fill out the required field</div>
-    //         )
-    //     }
-    // }
-
-
     render() {
 
         const {

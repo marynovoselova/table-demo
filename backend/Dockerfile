@@ -8,8 +8,4 @@ COPY . .
 
 RUN npm install
 
-EXPOSE 3000
-
-RUN chmod +x wait-for.sh
-
-ENTRYPOINT /wait-for.sh demo-mongo:27017 -- npm run start-dev
+EXPOSE 4000

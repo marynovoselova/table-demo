@@ -7,8 +7,9 @@ label {
 }
 
 .itemSelected__form {
-    background-color: rgb(201, 227, 255);
+    background-color: rgb(247, 251, 255);
     padding: 15px;
+    margin: 3% 0;
 }
 
 .itemSelected__header {
@@ -32,4 +33,13 @@ label {
     max-width: 100%;
     padding: 0;
     margin: 2% 0;
+}
+
+.itemSelected__navigation {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn__setting, .btn__cancel, .btn__save {
+    margin-right: 15%;
 }

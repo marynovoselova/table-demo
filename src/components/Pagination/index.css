@@ -1,3 +1,7 @@
+.btn-outline-dark.focus, .btn-outline-dark:focus, .btn.focus, .btn:focus {
+    box-shadow: none !important;
+}
+
 .pagination {
     display: flex;
     justify-content: flex-end;
@@ -5,6 +9,10 @@
 
 .pagination__button {
     margin: 1% .2%;
+}
+
+.pagination__button-active, .pagination__button-active:focus {
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5) !important;
 }
 
 .pagination__text {

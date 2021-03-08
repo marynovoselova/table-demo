@@ -1,19 +1,29 @@
-import {DEFAULT_PAGE_SIZE} from "./consts";
+import { DEFAULT_PAGE_SIZE } from "../consts";
 import axios from 'axios';
 
 
 export default class TableService {
 
-    _apiBase = 'http://localhost:8080/api/users'
+    _apiBase = 'http://localhost:80/api/users'
 
-    getListOfTableItems = async (page = 0, pageSize = DEFAULT_PAGE_SIZE) => {
-        const res = await axios.get(this._apiBase, { params: {page, pageSize} });
+    getData = async (page, searchText) => {
+        const res = await axios.get(this._apiBase, { params: {page, DEFAULT_PAGE_SIZE, searchText} });
         if (res.status !== 200) {
             throw new Error(`Could not fetch ${this._apiBase}` +
                 `, received ${res.status}`)
         }
 
-        return res.data.map(this._transformPerson);
+        return res.data.data.map(this._transformPerson);
+    }
+
+    getTotalData = async () => {
+        const res = await axios.get(this._apiBase);
+        if (res.status !== 200) {
+            throw new Error(`Could not fetch ${this._apiBase}` +
+                `, received ${res.status}`)
+        }
+
+        return res.data.total;
     }
 
     getPerson = async (id) => {
@@ -28,6 +38,7 @@ export default class TableService {
     sendData = async (body, onSuccess) => {
         await axios.post(this._apiBase, body).then(onSuccess);
     }
+
 
     _transformPerson = (person) => {
         return {

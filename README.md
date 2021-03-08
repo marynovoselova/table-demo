@@ -12,7 +12,9 @@ This app has:
 
 ### For start backend
 
-- cd backend/env/dev
+- cd backend
+- chmod +x wait-for.sh
+- cd env/dev
 - docker-compose up
 
 #### for reset db use 
