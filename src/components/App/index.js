@@ -46,7 +46,6 @@ export default class App extends Component {
         if (this.state.currentPage !== prevState.currentPage || this.state.searchText !== prevState.searchText) {
             this.initPeople(this.state.currentPage, this.state.searchText);
             this.getTotalPeople();
-            console.log(`currentPage: ${this.state.currentPage}`);
         }
     }
 
@@ -67,7 +66,6 @@ export default class App extends Component {
             .getTotalData()
             .then((number) => {
                 const pageCount = Math.ceil(number/DEFAULT_PAGE_SIZE);
-                console.log(pageCount);
                 this.setState({
                     ...this.state,
                     pageCount
