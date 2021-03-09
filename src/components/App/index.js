@@ -157,7 +157,8 @@ export default class App extends Component {
 
     render() {
 
-        const {people, selectedPerson, isModalOpen, currentPage, search, pageCount, sort: { direction, headerName }} = this.state;
+        const {people, selectedPerson, isModalOpen, currentPage, search, pageCount,
+                sort: { direction, headerName }} = this.state;
 
         const content = (people.length > 1) ? <Table
             data={people}
@@ -165,6 +166,11 @@ export default class App extends Component {
             onClickHeader={this.onClickHeader}
             direction={direction}
             headerName={headerName}
+        /> : null;
+        const pagination = (people.length > 1) ? <Pagination
+            onCurrentPageClicked={this.initPeople}
+            currentPage={currentPage}
+            pageCount={pageCount}
         /> : null;
 
         const modalWindow = isModalOpen ? this.renderModalWindow() : null;
@@ -180,11 +186,7 @@ export default class App extends Component {
                     </div>
                     <SearchPanel onSearchPanel={this.onSearchPanel} value={search}/>
                     {content}
-                    <Pagination
-                        onCurrentPageClicked={this.initPeople}
-                        currentPage={currentPage}
-                        pageCount={pageCount}
-                    />
+                    {pagination}
                     {modalWindow}
                     <ItemSelected
                         id={selectedPerson}

@@ -1,4 +1,4 @@
-## Demo users table
+## Demo users table ( pictures below ↓ )
 
 This app can: 
 - add data to table;
@@ -27,3 +27,11 @@ This app has:
 - npm start
 
 ### see app in http://localhost:8080 or http://localhost:3000
+
+
+![loading](./screenshots/loading.png "Loading")
+![table](./screenshots/table.png "Table")
+![modalWindow](./screenshots/modalWindow.png "Modal Window")
+![searching](./screenshots/searching.png "Searching")
+![edit1](./screenshots/edit1.png "Edit")
+![edit2](./screenshots/edit2.png "Edit")
