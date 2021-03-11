@@ -5,8 +5,10 @@ This app can:
 - create new users; 
 - see details about one user below table.
 
-This app has: 
-- pagination.
+This app has:
+- sorting;
+- pagination;
+- search.
 
 ## To see app working, firstly you need to start back.
 
