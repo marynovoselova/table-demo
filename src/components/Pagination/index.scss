@@ -1,0 +1,18 @@
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    &__text {
+        text-align: start;
+        margin: 2% 1% 1% 1%;
+    }
+    &__button {
+        margin: 1% .2%;
+        &-active, &-active:focus {
+            box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5) !important;
+        }
+    }
+}
+
+.btn-outline-dark.focus, .btn-outline-dark:focus, .btn.focus, .btn:focus {
+    box-shadow: none !important;
+}

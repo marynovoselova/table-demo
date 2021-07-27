@@ -1,0 +1,44 @@
+@mixin backgroundWidthPadding ($color, $width, $padding) {
+    background-color: $color;
+    width: $width;
+    padding: $padding;
+}
+
+.createItem__ {
+    &header {
+        font-weight: bold;
+        margin-bottom: 2%;
+        display: flex;
+        justify-content: space-between;
+    }
+    &form {
+        @include backgroundWidthPadding(rgb(201, 227, 255), 50rem, 15px);
+    }
+    &address {
+        font-size: 120%;
+        font-weight: bold;
+        margin: 1% 0;
+    }
+    &label {
+        font-size: 140%;
+    }
+    &description {
+        max-width: 100%;
+        padding: 0;
+        margin: 2% 0;
+    }
+    &button {
+        &Add {
+            @include backgroundWidthPadding(white, 100%, 1% 0);
+            margin-bottom: 1%;
+            font-weight: bold;
+        }
+        &Close {
+            font-size: 2rem;
+        }
+    }
+}
+
+.form-row {
+    align-items: baseline;
+}

@@ -1,0 +1,32 @@
+.input {
+    &:focus {
+         margin: 0;
+    }
+    &__transitionLabel {
+        color: #66afe9;
+        top: -.2rem;
+        background: white;
+    }
+    &__transitionInput {
+        margin: 5% 0;
+    }
+}
+
+.ui__label {
+    position: absolute;
+    top: .4rem;
+    left: .5rem;
+    transition: all .1s ease-in-out;
+    cursor: text;
+}
+
+:focus + .ui__label {
+    color: #66afe9;
+    top: -1rem;
+    background: white;
+    margin: 0;
+}
+
+.mb-3 {
+    margin: .5rem 0 1rem 0;
+}

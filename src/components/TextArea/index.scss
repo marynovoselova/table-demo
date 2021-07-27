@@ -1,0 +1,25 @@
+.textArea {
+    &__label {
+         color: #66afe9;
+         top: -.9rem !important;
+         background: white;
+     }
+    &__transition, &:focus {
+         margin: 0;
+     }
+}
+
+.ui__label2 {
+    position: absolute;
+    top: .4rem;
+    left: .5rem;
+    transition: all .1s ease-in-out;
+    cursor: text;
+}
+
+:focus + .ui__label2 {
+    color: #66afe9;
+    top: -1rem;
+    background: white;
+    margin: 0;
+}

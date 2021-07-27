@@ -1,0 +1,107 @@
+@mixin keyFramesPamars ($opacity, $transform) {
+    opacity: $opacity;
+    backface-visibility: hidden;
+    transform: $transform;
+}
+
+@mixin sizes ($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin sizesPlusPosition ($position, $width, $height) {
+    position: $position;
+    @include sizes($width, $height)
+}
+
+@mixin firstChild ($left, $top, $animation-delay) {
+    left: $left;
+    top: $top;
+    animation-delay: $animation-delay;
+}
+
+@mixin secondChild ($transform, $transform-origin) {
+    transform: rotate($transform);
+    transform-origin: $transform-origin;
+}
+
+@keyframes spinner__loading {
+    0% {
+        @include keyFramesPamars(1, translateZ(0) scale(1.5, 1.5));
+    }
+    100% {
+        @include keyFramesPamars(0, translateZ(0) scale(1, 1));
+    }
+}
+
+
+.spinner {
+    @include sizes(200px, 200px);
+    display: inline-block;
+    overflow: hidden;
+    &__loading {
+        @include sizesPlusPosition(relative, 100%, 100%);
+        transform: translateZ(0) scale(1);
+        backface-visibility: hidden;
+        transform-origin: 0 0;
+        & div {
+            box-sizing: content-box;
+            &:nth-child(1) > div {
+                @include firstChild(148px, 88px, -0.875s);
+            }
+            &:nth-child(2) > div {
+                @include firstChild(130px, 130px, -0.75s);
+            }
+            &:nth-child(3) > div {
+                @include firstChild(88px, 148px, -0.625s);
+            }
+            &:nth-child(4) > div {
+                @include firstChild(46px, 130px, -0.5s);
+            }
+            &:nth-child(5) > div {
+                @include firstChild(28px, 88px, -0.375s);
+            }
+            &:nth-child(6) > div {
+                @include firstChild(46px, 46px, -0.25s);
+            }
+            &:nth-child(7) > div {
+                @include firstChild(88px, 28px, -0.125s);
+            }
+            &:nth-child(8) > div {
+                @include firstChild(130px, 46px, 0s);
+            }
+        }
+        & div > div {
+            @include sizesPlusPosition(absolute, 24px, 24px);
+            border-radius: 50%;
+            background: #7abaff;
+            animation: spinner__loading 1s linear infinite;
+        }
+        & > div {
+            &:nth-child(1) {
+                @include secondChild(0deg, 160px 100px);
+            }
+            &:nth-child(2) {
+                @include secondChild(45deg, 142px 142px);
+            }
+            &:nth-child(3) {
+                @include secondChild(90deg, 100px 160px);
+            }
+            &:nth-child(4) {
+                @include secondChild(135deg, 58px 142px);
+            }
+            &:nth-child(5) {
+                @include secondChild(180deg, 40px 100px);
+            }
+            &:nth-child(6) {
+                @include secondChild(225deg, 58px 58px);
+            }
+            &:nth-child(7) {
+                @include secondChild(270deg, 100px 40px);
+            }
+            &:nth-child(8) {
+                @include secondChild(315deg, 142px 58px);
+            }
+        }
+    }
+}

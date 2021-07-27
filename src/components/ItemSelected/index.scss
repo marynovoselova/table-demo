@@ -1,0 +1,44 @@
+@mixin flexParams ($justify-content) {
+    display: flex;
+    justify-content: $justify-content;
+}
+
+@mixin indents ($padding, $margin) {
+    padding: $padding;
+    margin: $margin;
+}
+
+
+.itemSelected__ {
+    &header {
+        font-weight: bold;
+        margin-bottom: 2%;
+        @include flexParams(space-between);
+    }
+    &navigation {
+        @include flexParams(flex-end);
+    }
+    &form {
+        background-color: rgb(247, 251, 255);
+        @include indents(15px, 3% 0);
+    }
+    &button {
+        margin-right: 15%;
+    }
+    &label {
+        font-size: 140%;
+    }
+    &address {
+        font-size: 120%;
+        font-weight: bold;
+        margin: 1% 0;
+    }
+    &description {
+        max-width: 100%;
+        @include indents(0, 2% 0);
+    }
+}
+
+label {
+    padding-left: 5px;
+}
